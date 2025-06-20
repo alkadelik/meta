@@ -7,6 +7,8 @@ import axios from 'axios';
 export class TokenService {
   private readonly clientId = process.env.APP_ID;
   private readonly clientSecret = process.env.APP_SECRET;
+  private readonly instaAppId = process.env.INSTAGRAM_APP_ID;
+  private readonly instaAppSecret = process.env.INSTAGRAM_APP_SECRET
   private readonly grantType = 'client_credentials';
 
   constructor() {}
@@ -16,6 +18,15 @@ async getAccessToken(): Promise<string> {
   const response = await axios.get(url);
   return response.data.access_token;
 }
+
+async getInstaAccessToken(): Promise<string> {
+  const insaLogin = `https://api.instagram.com/oauth/authorize?client_id=${this.instaAppId}&redirect_uri={redirect-uri}&scope=user_profile,user_media&response_type=code`;
+  const response = await axios.get(insaLogin);
+  console.log(response)
+  return response.data.access_token;
+}
+
+
 
   async longLivedToken(shortLivedToken: string): Promise<any> {
     const url = `https://graph.facebook.com/v23.0/oauth/access_token`;

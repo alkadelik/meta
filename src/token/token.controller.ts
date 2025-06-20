@@ -16,6 +16,15 @@ export class TokenController {
     return { crtAccessToken };
   }
 
+   @Get('insta-token')
+  async getInstaToken() {
+    // Replace with your actual access token logic
+    // const accessToken = `token-for-${userId}`;
+    const crtAccessToken = await this.tokenService.getInstaAccessToken()
+
+    return { crtAccessToken };
+  }
+
 @Post('/ll-token')
 async getLongLivedToken(@Body() body: { 'll-token': string }) {
   const shortLivedToken = body['ll-token'];
