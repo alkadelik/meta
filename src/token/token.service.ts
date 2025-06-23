@@ -20,7 +20,10 @@ async getAccessToken(): Promise<string> {
 }
 
 async getInstaAccessToken(): Promise<string> {
-  const insaLogin = `https://api.instagram.com/oauth/authorize?client_id=${this.instaAppId}&redirect_uri={redirect-uri}&scope=user_profile,user_media&response_type=code`;
+  const insaLogin = `https://api.instagram.com/oauth/authorize?client_id=${this.instaAppId}&redirect_uri={redirect-uri}&scope=instagram_business_basic,
+    instagram_business_manage_messages,
+    instagram_business_manage_comments,
+    instagram_business_content_publish&response_type=code`;
   const response = await axios.get(insaLogin);
   console.log(response)
   return response.data.access_token;
